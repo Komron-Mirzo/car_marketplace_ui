@@ -16,6 +16,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.1.0
   google_nav_bar: ^5.0.6
+  carousel_slider: ^4.1.1
+
 
 
 
@@ -25,9 +27,12 @@ dev_dependencies:
 
   flutter_lints: ^1.0.0
 
+
 flutter:
   assets:
-    - assets/
+    - assets/img/png/
+    - assets/img/jpg/
+    - assets/json/car_list.json
 
 
 

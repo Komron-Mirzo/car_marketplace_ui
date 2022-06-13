@@ -1,11 +1,12 @@
 import 'dart:ui';
-
+import 'package:car_marketplace_ui/pages/profile_page.dart';
+import 'package:car_marketplace_ui/pages/search_page.dart';
+import 'package:car_marketplace_ui/widgets/single_car.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
-import 'car_store.dart';
-import 'colors.dart';
+import 'pages/car_store_page.dart';
+import 'widgets/colors.dart';
 
 void main() {
   runApp(const CarApp());
@@ -17,6 +18,14 @@ class CarApp extends StatefulWidget {
   @override
   State<CarApp> createState() => _CarAppState();
 }
+
+int _selectedIndex = 0;
+
+List _listPages = <Widget>[
+  const CarStorePage(),
+  const SearchPage(),
+  const ProfilePage(),
+];
 
 class _CarAppState extends State<CarApp> {
   @override
@@ -33,7 +42,7 @@ class _CarAppState extends State<CarApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         extendBody: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColor.backgroundColor,
         bottomNavigationBar: Container(
           padding: const EdgeInsets.all(
             18.0,
@@ -64,6 +73,12 @@ class _CarAppState extends State<CarApp> {
               tabBackgroundColor: AppColor.pinkAccentColor,
               activeColor: AppColor.redCircleColor,
               color: Colors.black.withOpacity(0.55),
+              selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
               tabs: const [
                 GButton(
                   icon: FontAwesomeIcons.dharmachakra,
@@ -95,21 +110,11 @@ class _CarAppState extends State<CarApp> {
                     bottom: 15.0,
                   ),
                 ),
-                GButton(
-                  icon: FontAwesomeIcons.code,
-                  text: "About me",
-                  padding: EdgeInsets.only(
-                    left: 20.0,
-                    right: 20.0,
-                    top: 15.0,
-                    bottom: 15.0,
-                  ),
-                ),
               ],
             ),
           ),
         ),
-        body: const CarStorePage(),
+        body: _listPages.elementAt(_selectedIndex),
       ),
     );
   }

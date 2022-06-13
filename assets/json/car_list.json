@@ -1,0 +1,67 @@
+
+
+[
+  {
+    "img":"assets/img/jpg/captiva.jpg",
+    "year":"2014",
+    "name": "Chevrolet Captiva",
+    "speed": "100k Mi",
+    "color": "White",
+    "price": "$ 24,555",
+    "location": "Andijan"
+  },
+  {
+    "img":"assets/img/jpg/ferrari.jpg",
+    "year":"2021",
+    "name": "Ferrari",
+    "speed": "200k Km",
+    "color": "Yellow",
+    "price": "$ 150,125",
+    "location": "Tashkent"
+  },
+  {
+    "img":"assets/img/jpg/damas.jpg",
+    "year":"2007",
+    "name": "Daewoo Damas",
+    "speed": "80k Km",
+    "color": "White",
+    "price": "$ 11,765",
+    "location": "Jizzakh"
+  },
+  {
+    "img":"assets/img/jpg/matiz.jpg",
+    "year":"2003",
+    "name": "Daewoo Matiz",
+    "speed": "75k Km",
+    "color": "Teal",
+    "price": "$ 6,825",
+    "location": "Xorezm"
+  },
+  {
+    "img":"assets/img/jpg/gentra.jpg",
+    "year":"2012",
+    "name": "Chevrolet Gentra",
+    "speed": "120k Km",
+    "color": "White",
+    "price": "$ 14,500",
+    "location": "Samarkand"
+  },
+  {
+    "img":"assets/img/jpg/spark.jpg",
+    "year":"2015",
+    "name": "Chevrolet Spark",
+    "speed": "150k Km",
+    "color": "Green",
+    "price": "$ 9,400",
+    "location": "Nukus"
+  },
+  {
+    "img":"assets/img/jpg/tesla.jpg",
+    "year":"2022",
+    "name": "Tesla Onyx",
+    "speed": "220k Km",
+    "color": "Silver",
+    "price": "$ 39,750",
+    "location": "Tashkent"
+  }
+]
