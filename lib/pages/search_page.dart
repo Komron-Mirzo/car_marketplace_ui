@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../widgets/colors.dart';
+import '../widgets/single_car.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({
@@ -173,123 +174,162 @@ class _SearchPageState extends State<SearchPage> {
                   .loadString('assets/json/car_list.json'),
               builder: (context, snapshot) {
                 // Decode the JSON
-
-                var newData = json.decode(snapshot.data.toString());
+                List newData = json.decode(snapshot.data.toString());
 
                 return CarouselSlider.builder(
                   itemCount: newData.length,
                   itemBuilder: (context, index, id) {
-                    return Container(
-                      padding: const EdgeInsets.all(17.0),
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(
-                          25.0,
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    SinglePage(index: index),
+                              ));
+                        });
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(
+                            25.0,
+                          ),
                         ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.3,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(newData[index]['img']),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(
-                                20.0,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              height: MediaQuery.of(context).size.height * 0.33,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(newData[index]['img']),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  25.0,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15.0,
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              newData[index]['year'],
-                              style: TextStyle(
-                                color: AppColor.secondTextColor,
-                                fontSize: 18.0,
+                            const SizedBox(
+                              height: 15.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0,
+                              ),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  newData[index]['year'],
+                                  style: TextStyle(
+                                    color: AppColor.secondTextColor,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                newData[index]['name'],
-                                style: TextStyle(
-                                  fontSize: 24.0,
-                                  color: AppColor.mainTextColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0,
                               ),
-                              Expanded(
-                                child: Container(),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    newData[index]['name'],
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: AppColor.mainTextColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Expanded(
+                                    child: Container(),
+                                  ),
+                                  Text(
+                                    newData[index]['price'],
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: AppColor.mainTextColor,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                newData[index]['price'],
-                                style: TextStyle(
-                                  fontSize: 22.0,
-                                  color: AppColor.mainTextColor,
-                                ),
+                            ),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0,
                               ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                height: 40.0,
-                                width: 100.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  color: AppColor.backgroundColor,
-                                ),
-                                child: Center(
-                                  child: Text(newData[index]['speed']),
-                                ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 40.0,
+                                    width: 100.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      color: AppColor.backgroundColor,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        newData[index]['speed'],
+                                        style: const TextStyle(
+                                          fontSize: 14.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Expanded(
+                                    child: Container(),
+                                  ),
+                                  Container(
+                                    height: 40.0,
+                                    width: 100.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      color: AppColor.backgroundColor,
+                                    ),
+                                    child: Center(
+                                      child: Text(newData[index]['color']),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Expanded(
+                                    child: Container(),
+                                  ),
+                                  Container(
+                                    height: 40.0,
+                                    width: 100.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      color: AppColor.backgroundColor,
+                                    ),
+                                    child: Center(
+                                      child: Text(newData[index]['location']),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                child: Container(),
-                              ),
-                              Container(
-                                height: 40.0,
-                                width: 100.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  color: AppColor.backgroundColor,
-                                ),
-                                child: Center(
-                                  child: Text(newData[index]['color']),
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(),
-                              ),
-                              Container(
-                                height: 40.0,
-                                width: 100.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  color: AppColor.backgroundColor,
-                                ),
-                                child: Center(
-                                  child: Text(newData[index]['location']),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },

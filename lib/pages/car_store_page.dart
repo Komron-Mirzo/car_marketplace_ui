@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:convert';
 
+import '../widgets/single_car.dart';
+
 class CarStorePage extends StatefulWidget {
   const CarStorePage({
     Key? key,
@@ -231,115 +233,133 @@ class _CarStorePageState extends State<CarStorePage> {
 
                       return ListView.separated(
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            padding: const EdgeInsets.all(17.0),
-                            width: MediaQuery.of(context).size.width,
-                            height: 115,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(
-                                25.0,
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        SinglePage(index: index),
+                                  ),
+                                );
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(10.0),
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              height: 115,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(
+                                  25.0,
+                                ),
                               ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
-                                  width: 100.0,
-                                  height: 100.0,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage(newData[index]['img']),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                      20.0,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.03,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      newData[index]['year'],
-                                      style: TextStyle(
-                                        color: AppColor.secondTextColor,
-                                        fontSize: 15.0,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    width: 100.0,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image:
+                                            AssetImage(newData[index]['img']),
+                                        fit: BoxFit.cover,
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                        20.0,
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    Text(
-                                      newData[index]['name'],
-                                      style: TextStyle(
-                                        color: AppColor.mainTextColor,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold,
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.03,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        newData[index]['year'],
+                                        style: TextStyle(
+                                          color: AppColor.secondTextColor,
+                                          fontSize: 13.0,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      Text(
+                                        newData[index]['name'],
+                                        style: TextStyle(
+                                          color: AppColor.mainTextColor,
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            newData[index]['speed'],
+                                            style: TextStyle(
+                                              fontSize: 13.0,
+                                              color: AppColor.secondTextColor,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10.0,
+                                          ),
+                                          Text(
+                                            newData[index]['color'],
+                                            style: TextStyle(
+                                              fontSize: 13.0,
+                                              color: AppColor.secondTextColor,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10.0,
+                                          ),
+                                          Text(
+                                            newData[index]['price'],
+                                            style: TextStyle(
+                                              fontSize: 13.0,
+                                              color: AppColor.secondTextColor,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10.0,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: Container(),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade200,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Center(
+                                        child: FaIcon(
+                                          FontAwesomeIcons.solidHeart,
+                                          size: 20.0,
+                                          color: AppColor.heartGreyColor,
+                                        ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          newData[index]['speed'],
-                                          style: TextStyle(
-                                            fontSize: 14.0,
-                                            color: AppColor.secondTextColor,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 20.0,
-                                        ),
-                                        Text(
-                                          newData[index]['color'],
-                                          style: TextStyle(
-                                            fontSize: 14.0,
-                                            color: AppColor.secondTextColor,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 20.0,
-                                        ),
-                                        Text(
-                                          newData[index]['price'],
-                                          style: TextStyle(
-                                            fontSize: 14.0,
-                                            color: AppColor.secondTextColor,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 20.0,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Expanded(
-                                  child: Container(),
-                                ),
-                                Container(
-                                  width: 60.0,
-                                  height: 60.0,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey.shade200,
-                                    shape: BoxShape.circle,
                                   ),
-                                  child: Center(
-                                    child: FaIcon(
-                                      FontAwesomeIcons.solidHeart,
-                                      size: 20.0,
-                                      color: AppColor.heartGreyColor,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         },
